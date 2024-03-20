@@ -2,36 +2,36 @@
 using namespace std;
 
 int main() {
-    long long number_of_floors, time_total = 0;
+    int number_of_floors, time_total = 0;
     int lift_place;
     vector<int> callings_total;
-    map<int, int>statistic;
-    int time_of_sim;
+    map<int, int>map;
+    int time_of_simulation;
     cout << "*****Elevator Simulator*****" << endl << endl << endl;
     cout << "Input the number of floors: ";
     cin >> number_of_floors;
     cout << "Input simulation time duration: ";
-    cin >> time_of_sim; cout << '\n';
+    cin >> time_of_simulation; cout << '\n';
     cout << "Time between floors (in seconds): ";
-    int interval;
-    cin >> interval;
+    int time_between;
+    cin >> time_between;
     cout << "Simulating passengers calls..." << '\n';
 
     lift_place = number_of_floors;
     srand(time(NULL));
-    for (int i = 0; i < time_of_sim; i++) {
+    for (int i = 0; i < time_of_simulation; i++) {
         callings_total.push_back(1 + (rand() % number_of_floors));
     }
 
     for (auto e : callings_total) {
-        statistic[e]++;
+        map[e]++;
         cout << "Passenger calls from floor: " << e << "\n";
     }
-    cout << endl;
+    cout << "\n";
     map<int, int>::iterator it;
 
     for (int i = 0; i < callings_total.size(); i++) {
-        time_total += abs(lift_place - callings_total[i]) * interval;
+        time_total += abs(lift_place - callings_total[i]) * time_between;
         lift_place = callings_total[i];
     }
 
@@ -45,7 +45,7 @@ int main() {
     }
     cout << "Frequency of calls from each floor: " << endl;
 
-    for (it = statistic.begin(); it != statistic.end(); it++) {
+    for (it = map.begin(); it != map.end(); it++) {
         cout << "Floor " << it->first << ": " << it->second << " calls" << '\n';
     }
     cout << "****************************" << endl;
